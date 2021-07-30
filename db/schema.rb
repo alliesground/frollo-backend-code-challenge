@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_30_101527) do
+ActiveRecord::Schema.define(version: 2021_07_30_150026) do
 
   create_table "transactions", force: :cascade do |t|
     t.string "posted_date"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2021_07_30_101527) do
     t.decimal "amount"
     t.text "description", limit: 300
     t.string "type"
+    t.string "category"
   end
 
 end
