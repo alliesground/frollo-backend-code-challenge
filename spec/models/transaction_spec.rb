@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'sidekiq/testing'
 
 RSpec.describe Transaction, type: :model do
   it do
@@ -17,5 +18,18 @@ RSpec.describe Transaction, type: :model do
   it do
     should validate_length_of(:description).
       is_at_most(300)
+  end
+
+  describe '#categorise' do
+    let(:transaction) { create(:transaction) }
+    before do
+      Sidekiq.stub(:redis).and_return(nil)
+    end
+
+    it 'queues categorisation job' do
+      expect {
+        transaction.categorise
+      }.to change{ Categoriser.jobs.size }
+    end
   end
 end
