@@ -15,7 +15,8 @@ module Api
           :currency,
           :amount,
           :description,
-          :type
+          :type,
+          :category
         )
       end
     end

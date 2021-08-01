@@ -5,5 +5,10 @@ FactoryBot.define do
     amount { 100 }
     description { "This is a test" }
     type { "OTHER" }
+    category { nil }
+
+    factory :invalid_transaction do
+      currency { "INVALID" }
+    end
   end
 end
