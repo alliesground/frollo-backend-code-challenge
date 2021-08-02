@@ -68,4 +68,20 @@ RSpec.describe 'Api::V1::TransactionsController', type: :request do
       end
     end
   end
+
+  describe 'GET /api/transactions' do
+    let!(:transactions) { create_list(:transaction, 2) }
+
+    before do 
+      get '/api/transactions'
+    end
+
+    it 'returns list of transactions' do
+      expect(json_response.size).to eq 2
+    end
+
+    it 'responds with status 201' do
+      expect(response).to have_http_status 201
+    end
+  end
 end

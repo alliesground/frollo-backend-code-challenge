@@ -13,6 +13,11 @@ module Api
         render json: @transaction, status: :ok
       end
 
+      def index 
+        transactions = Transaction.all
+        render json: transactions, status: :created
+      end
+
       private
 
       def set_transaction
