@@ -33,4 +33,29 @@ RSpec.describe 'Api::V1::TransactionsController', type: :request do
       end
     end
   end
+
+  describe 'GET /api/transaction/:id' do
+    context 'when transaction exists' do
+      let!(:transaction) { create(:transaction) }
+
+      before :each do
+        get "/api/transactions/#{transaction.id}"
+      end
+
+      it 'responds with status 200' do
+        expect(response).to have_http_status 200
+      end
+
+      it 'returns the transaction' do
+        expect(json_response['id']).to eq transaction.id
+      end
+    end
+
+    context 'when transaction does not exist' do
+      it 'responds with status 404' do
+        get "/api/transactions/1"
+        expect(response).to have_http_status 404
+      end
+    end
+  end
 end
